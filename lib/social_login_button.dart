@@ -1,3 +1,5 @@
+library social_login_button;
+
 import 'package:flutter/material.dart';
 import 'package:social_login_buttons/login_button.dart';
 
