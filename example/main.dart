@@ -83,6 +83,7 @@ class MyHomePage extends StatelessWidget {
               SocialLoginButton(
                 backgroundColor: Colors.amber,
                 height: 50,
+                width: 200,
                 text: 'SignIn',
                 borderRadius: 20,
                 fontSize: 25,

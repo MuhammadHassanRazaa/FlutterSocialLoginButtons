@@ -163,71 +163,6 @@ lib/generated_plugin_registrant.dart
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-### Images ###
-# JPEG
-*.jpg
-*.jpeg
-*.jpe
-*.jif
-*.jfif
-*.jfi
-
-# JPEG 2000
-*.jp2
-*.j2k
-*.jpf
-*.jpx
-*.jpm
-*.mj2
-
-# JPEG XR
-*.jxr
-*.hdp
-*.wdp
-
-# Graphics Interchange Format
-*.gif
-
-# RAW
-*.raw
-
-# Web P
-*.webp
-
-# Portable Network Graphics
-*.png
-
-# Animated Portable Network Graphics
-*.apng
-
-# Multiple-image Network Graphics
-*.mng
-
-# Tagged Image File Format
-*.tiff
-*.tif
-
-# Scalable Vector Graphics
-*.svg
-*.svgz
-
-# Portable Document Format
-*.pdf
-
-# X BitMap
-*.xbm
-
-# BMP
-*.bmp
-*.dib
-
-# ICO
-*.ico
-
-# 3D Images
-*.3dm
-*.max
-
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
@@ -403,6 +338,8 @@ obj/
 /out/
 
 # User-specific configurations
+.idea/
+.vscode
 .idea/caches/
 .idea/libraries/
 .idea/shelf/
@@ -459,5 +396,13 @@ hs_err_pid*
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+ android/app/src/main/res/mipmap-hdpi/
+android/app/src/main/res/mipmap-mdpi/
+android/app/src/main/res/mipmap-xhdpi/
+android/app/src/main/res/mipmap-xxhdpi/
+android/app/src/main/res/mipmap-xxxhdpi/
+web/
+windows/runner/resources/
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,visualstudiocode,images,android,androidstudio,intellij

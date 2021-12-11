@@ -28,6 +28,7 @@ You can also specify some other arguments which are:
 - backgroundColor
 - textColor
 - height
+- width
 - borderRadius
 - fontSize
 - mode
@@ -194,7 +195,7 @@ class MyHomePage extends StatelessWidget {
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
 
 ## Screenshot
-![Image](https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/Screenshots/ss1.png)
+![Image](https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/blob/master/Screenshots/ss1.png)
