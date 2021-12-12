@@ -1,3 +1,4 @@
+[![pub package](https://img.shields.io/pub/v/social_login_buttons.svg)](https://pub.dev/packages/social_login_buttons)
 # Flutter Social Login Button
 
 Social Login Button is a flutter package to create social media login buttons of all common used SSO.
