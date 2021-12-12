@@ -3,6 +3,7 @@ library social_login_button;
 export 'package:social_login_buttons/social_login_button.dart'
     show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 enum SocialLoginButtonType {
@@ -28,7 +29,7 @@ class SocialLoginButton extends StatelessWidget {
     this.imagePath,
     this.text,
     this.backgroundColor,
-    this.disabledbackgroundColor,
+    this.disabledBackgroundColor,
     this.textColor,
     this.height = 55.0,
     this.borderRadius = 4.0,
@@ -47,7 +48,7 @@ class SocialLoginButton extends StatelessWidget {
   double? borderRadius;
   double? fontSize;
   double? width;
-  Color? disabledbackgroundColor;
+  Color? disabledBackgroundColor;
   SocialLoginButtonMode? mode;
 
   @override
@@ -116,7 +117,7 @@ class SocialLoginButton extends StatelessWidget {
       text: this.text ?? text,
       color: textColor ?? color,
       backgroundColor: this.backgroundColor ?? backgroundColor,
-      disabledBackgroundColor: disabledbackgroundColor,
+      disabledBackgroundColor: disabledBackgroundColor,
       onPressed: onPressed,
       height: height!,
       fontSize: fontSize!,
@@ -201,7 +202,11 @@ class _LoginButton extends StatelessWidget {
 
   createImageChildren(String? imageName, {SocialLoginButtonMode? mode}) {
     if (mode == null || mode == SocialLoginButtonMode.multi) {
-      return imageName == null ? Column() : Image.asset(imageName);
+      return imageName == null
+          ? Column()
+      :Image.network('https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/raw/master/'+imageName, width: 50,);
+
+
     }
     return Column();
   }

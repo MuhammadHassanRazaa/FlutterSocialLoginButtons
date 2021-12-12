@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.tittle}) : super(key: key);
   final String tittle;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +93,7 @@ class MyHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.apple,
@@ -101,11 +102,6 @@ class MyHomePage extends StatelessWidget {
                   ),
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
-                    onPressed: () {},
-                    mode: SocialLoginButtonMode.single,
-                  ),
-                  SocialLoginButton(
-                    buttonType: SocialLoginButtonType.microsoft,
                     onPressed: () {},
                     mode: SocialLoginButtonMode.single,
                   ),
