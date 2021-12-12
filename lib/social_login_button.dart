@@ -3,7 +3,6 @@ library social_login_button;
 export 'package:social_login_buttons/social_login_button.dart'
     show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 enum SocialLoginButtonType {
@@ -35,9 +34,11 @@ class SocialLoginButton extends StatelessWidget {
     this.borderRadius = 4.0,
     this.fontSize = 15.0,
     this.width,
+    this.imageWidth = 45,
     this.mode = SocialLoginButtonMode.multi,
   }) : super(key: key);
-
+  static const String _imageURL =
+      'https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/raw/master/images/';
   final SocialLoginButtonType buttonType;
   final VoidCallback onPressed;
   String? imagePath;
@@ -48,6 +49,7 @@ class SocialLoginButton extends StatelessWidget {
   double? borderRadius;
   double? fontSize;
   double? width;
+  double? imageWidth;
   Color? disabledBackgroundColor;
   SocialLoginButtonMode? mode;
 
@@ -62,49 +64,49 @@ class SocialLoginButton extends StatelessWidget {
       case SocialLoginButtonType.facebook:
         color = Colors.white;
         text = "Sign In with Facebook";
-        imageName = "images/facebook-logo.png";
+        imageName = _imageURL + "facebook-logo.png";
         backgroundColor = const Color(0xFF334D92);
         break;
       case SocialLoginButtonType.google:
         color = Colors.black87;
         text = "Sign In with Google";
-        imageName = "images/google-logo.png";
+        imageName = _imageURL + "google-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.twitter:
         color = Colors.white;
         text = "Sign In with Twitter";
-        imageName = "images/twitter-logo.png";
+        imageName = _imageURL + "twitter-logo.png";
         backgroundColor = const Color(0xFF1DA1F2);
         break;
       case SocialLoginButtonType.apple:
         color = Colors.black;
         text = "Sign In with Apple";
-        imageName = "images/apple-logo.png";
+        imageName = _imageURL + "apple-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.appleBlack:
         color = Colors.white;
         text = "Sign In with Apple";
-        imageName = "images/apple-black-logo.png";
+        imageName = _imageURL + "apple-black-logo.png";
         backgroundColor = Colors.black;
         break;
       case SocialLoginButtonType.microsoft:
         color = const Color(0xFF5E5E5E);
         text = "Sign In with Microsoft";
-        imageName = "images/microsoft-logo.png";
+        imageName = _imageURL + "microsoft-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.microsoftBlack:
         color = Colors.white;
         text = "Sign In with Microsoft";
-        imageName = "images/microsoft-logo.png";
+        imageName = _imageURL + "microsoft-logo.png";
         backgroundColor = const Color(0xFF2F2F2F);
         break;
       case SocialLoginButtonType.github:
         color = const Color(0xFFFEFEFE);
         text = "Sign In with Github";
-        imageName = "images/github-logo.png";
+        imageName = _imageURL + "github-logo.png";
         backgroundColor = const Color(0xFF444444);
         break;
       case SocialLoginButtonType.generalLogin:
@@ -113,7 +115,7 @@ class SocialLoginButton extends StatelessWidget {
         backgroundColor = Colors.teal[700];
     }
     return _LoginButton(
-      imageName: imageName,
+      imageURL: imageName,
       text: this.text ?? text,
       color: textColor ?? color,
       backgroundColor: this.backgroundColor ?? backgroundColor,
@@ -124,6 +126,7 @@ class SocialLoginButton extends StatelessWidget {
       borderRadius: borderRadius!,
       mode: mode!,
       width: width,
+      imageWidth: imageWidth,
     );
   }
 }
@@ -131,7 +134,7 @@ class SocialLoginButton extends StatelessWidget {
 class _LoginButton extends StatelessWidget {
   const _LoginButton({
     Key? key,
-    required this.imageName,
+    required this.imageURL,
     required this.text,
     required this.color,
     this.backgroundColor = Colors.blueAccent,
@@ -142,15 +145,17 @@ class _LoginButton extends StatelessWidget {
     required this.onPressed,
     required this.mode,
     this.width,
+    this.imageWidth,
   }) : super(key: key);
 
-  final String? imageName;
+  final String? imageURL;
   final String text;
   final Color color;
   final Color? backgroundColor;
   final Color? disabledBackgroundColor;
   final double height;
   final double? width;
+  final double? imageWidth;
   final double borderRadius;
   final double fontSize;
   final VoidCallback onPressed;
@@ -166,14 +171,14 @@ class _LoginButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              createImageChildren(imageName),
+              createImageChildren(imageURL),
               Text(
-                mode == SocialLoginButtonMode.multi ? text : 'Sign In',
+                mode == SocialLoginButtonMode.multi ? text : ' Sign In',
                 style: TextStyle(color: color, fontSize: fontSize),
               ),
               Opacity(
                 opacity: 0.0,
-                child: createImageChildren(imageName, mode: mode),
+                child: createImageChildren(imageURL, mode: mode),
               ),
             ],
           ),
@@ -200,13 +205,14 @@ class _LoginButton extends StatelessWidget {
     );
   }
 
-  createImageChildren(String? imageName, {SocialLoginButtonMode? mode}) {
+  createImageChildren(String? imageUrl, {SocialLoginButtonMode? mode}) {
     if (mode == null || mode == SocialLoginButtonMode.multi) {
-      return imageName == null
+      return imageUrl == null
           ? Column()
-      :Image.network('https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/raw/master/'+imageName, width: 50,);
-
-
+          : Image.network(
+              imageUrl,
+              width: imageWidth,
+            );
     }
     return Column();
   }

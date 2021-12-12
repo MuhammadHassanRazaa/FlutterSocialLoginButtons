@@ -79,6 +79,7 @@ class MyHomePage extends StatelessWidget {
               SocialLoginButton(
                 buttonType: SocialLoginButtonType.microsoftBlack,
                 onPressed: () {},
+                imageWidth: 20,
               ),
               const SizedBox(height: 10),
               SocialLoginButton(

@@ -23,7 +23,8 @@ Add the dependency in pubsec.yaml file.
 ```
 You can also specify some other arguments which are:
 
-- imagePath
+- imageURL (if you're specifying the image link from your Github repo, don't forget to change blob with raw)
+- imageWidth
 - text
 - backgroundColor
 - textColor
@@ -95,6 +96,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.tittle}) : super(key: key);
   final String tittle;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,11 +151,13 @@ class MyHomePage extends StatelessWidget {
               SocialLoginButton(
                 buttonType: SocialLoginButtonType.microsoftBlack,
                 onPressed: () {},
+                imageWidth: 20,
               ),
               const SizedBox(height: 10),
               SocialLoginButton(
                 backgroundColor: Colors.amber,
                 height: 50,
+                width: 200,
                 text: 'SignIn',
                 borderRadius: 20,
                 fontSize: 25,
@@ -162,7 +166,7 @@ class MyHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.apple,
@@ -171,11 +175,6 @@ class MyHomePage extends StatelessWidget {
                   ),
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
-                    onPressed: () {},
-                    mode: SocialLoginButtonMode.single,
-                  ),
-                  SocialLoginButton(
-                    buttonType: SocialLoginButtonType.microsoft,
                     onPressed: () {},
                     mode: SocialLoginButtonMode.single,
                   ),
