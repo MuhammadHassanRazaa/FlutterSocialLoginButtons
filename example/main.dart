@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_login_buttons/social_login_button.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -96,11 +96,6 @@ class MyHomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SocialLoginButton(
-                    buttonType: SocialLoginButtonType.apple,
-                    onPressed: () {},
-                    mode: SocialLoginButtonMode.single,
-                  ),
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
                     onPressed: () {},

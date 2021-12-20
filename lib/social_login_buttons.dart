@@ -3,6 +3,7 @@ library social_login_button;
 export 'package:social_login_buttons/social_login_buttons.dart'
     show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// All Supported Button Types
@@ -265,6 +266,7 @@ class _LoginButton extends StatelessWidget {
           : Image.network(
               imageUrl,
               width: imageWidth,
+        errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
             );
     }
     return Column();

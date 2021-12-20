@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.5+2] - 2021-12-20
+
+### Fixed
+
+- Resolved Internet Exception
+
 ## [1.0.5+1] - 2021-12-13
 
 ### Added
