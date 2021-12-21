@@ -12,7 +12,7 @@ Add the dependency in pubsec.yaml file.
   dependencies:
     flutter:
       sdk: flutter
-    social_login_button:
+    social_login_button: 1.0.5+3
 ```
 
 ## How to Use
@@ -26,6 +26,7 @@ Add the dependency in pubsec.yaml file.
 You can also specify some other arguments which are:
 
 - imageURL (if you're specifying the image link from your Github repo, don't forget to change blob with raw)
+- imagePath (you can also use local image, Local will be preferred incase cpecifed both)
 - imageWidth
 - text
 - backgroundColor
@@ -46,6 +47,9 @@ Below is the example with all arguments supplied:
       borderRadius: 20,
       fontSize: 25,
       buttonType: SocialLoginButtonType.generalLogin,
+      imageWidth: 20,
+      imagepath: "assets/file.png",
+      imageURL: "URL",
       onPressed: () {},
    ),
 ```
@@ -73,7 +77,7 @@ There are two modes available for the buttons, You can make shorter buttons with
 
 ```
 import 'package:flutter/material.dart';
-import 'package:social_login_buttons/social_login_button.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -159,7 +163,6 @@ class MyHomePage extends StatelessWidget {
               SocialLoginButton(
                 backgroundColor: Colors.amber,
                 height: 50,
-                width: 200,
                 text: 'SignIn',
                 borderRadius: 20,
                 fontSize: 25,
@@ -170,11 +173,6 @@ class MyHomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SocialLoginButton(
-                    buttonType: SocialLoginButtonType.apple,
-                    onPressed: () {},
-                    mode: SocialLoginButtonMode.single,
-                  ),
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
                     onPressed: () {},
@@ -196,7 +194,7 @@ class MyHomePage extends StatelessWidget {
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-[GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/)
+[Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
 
 ## Screenshot
 ![Image](https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/blob/master/Screenshots/ss1.png)

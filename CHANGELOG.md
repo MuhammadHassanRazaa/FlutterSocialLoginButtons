@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.5+3] - 2021-12-21
+
+### Added
+
+- User can now specify image from both network and local storage. (Local will be preferred if both provided)
+
 ## [1.0.5+2] - 2021-12-20
 
 ### Fixed

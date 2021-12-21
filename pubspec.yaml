@@ -13,7 +13,7 @@ homepage: https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.5+2
+version: 1.0.5+3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -25,7 +25,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  cached_network_image: ^3.2.0
   flutter:
     sdk: flutter
 
@@ -55,7 +54,28 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - lib/assets/google-logo.png
+    - lib/assets/2.0x/google-logo.png
+    - lib/assets/3.0x/google-logo.png
+    - lib/assets/facebook-logo.png
+    - lib/assets/2.0x/facebook-logo.png
+    - lib/assets/3.0x/facebook-logo.png
+    - lib/assets/apple-logo.png
+    - lib/assets/2.0x/apple-logo.png
+    - lib/assets/3.0x/apple-logo.png
+    - lib/assets/apple-black-logo.png
+    - lib/assets/2.0x/apple-black-logo.png
+    - lib/assets/3.0x/apple-black-logo.png
+    - lib/assets/github-logo.png
+    - lib/assets/2.0x/github-logo.png
+    - lib/assets/3.0x/github-logo.png
+    - lib/assets/microsoft-logo.png
+    - lib/assets/2.0x/microsoft-logo.png
+    - lib/assets/3.0x/microsoft-logo.png
+    - lib/assets/twitter-logo.png
+    - lib/assets/2.0x/twitter-logo.png
+    - lib/assets/3.0x/twitter-logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
