@@ -3,7 +3,6 @@ library social_login_button;
 export 'package:social_login_buttons/social_login_buttons.dart'
     show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// All Supported Button Types
@@ -20,23 +19,23 @@ enum SocialLoginButtonType {
   /// Apple
   apple,
 
-  /// Appple (with black logo)
+  /// Apple (with black background)
   appleBlack,
 
   /// Microsoft
   microsoft,
 
-  /// Microsoft (with black logo)
+  /// Microsoft (with black background)
   microsoftBlack,
 
   /// Github
   github,
 
-  /// General Logo, wihtout any image, default text is 'Sign In'
+  /// General Logo, without any image, default text is 'Sign In'
   generalLogin
 }
 
-/// All SUpported Button Modes
+/// All SSupported Button Modes
 enum SocialLoginButtonMode { single, multi }
 
 // ignore: must_be_immutable
@@ -45,6 +44,7 @@ class SocialLoginButton extends StatelessWidget {
     Key? key,
     required this.buttonType,
     required this.onPressed,
+    this.imageURL,
     this.imagePath,
     this.text,
     this.backgroundColor,
@@ -58,54 +58,57 @@ class SocialLoginButton extends StatelessWidget {
     this.mode = SocialLoginButtonMode.multi,
   }) : super(key: key);
 
-  /// Default URL for images used in the package.
-  static const String _imageURL =
-      'https://github.com/MuhammadHassanRazaa/FlutterSocialLoginButtons/raw/master/images/';
-
-  /// Buton Type
+  /// Button Type
   final SocialLoginButtonType buttonType;
 
   /// Action onPressed
   final VoidCallback onPressed;
 
-  /// Image URL, an optional param can be used to override defualt image.
+  /// Image URL (increase you want to use network image), an optional param can be
+  /// used to override default image.
+  String? imageURL;
+
+  /// Image Path (increase you want to use local image), an optional param can be
+  /// used to override default image.
   String? imagePath;
 
-  /// Buton text, an optional param can be used to override defualt text
+  /// Button text, an optional param can be used to override default text
   String? text;
 
-  /// Background Color, an optional param can be used to override defualt
+  /// Background Color, an optional param can be used to override default
   /// background color.
   Color? backgroundColor;
 
-  /// Text Color, an optional param can be used to override defualt text color.
+  /// Text Color, an optional param can be used to override default text color.
   Color? textColor;
 
-  /// Height, an optional param can be used to override defualt height of button,
+  /// Height, an optional param can be used to override default height of button,
   /// which is 55.0
   double? height;
 
-  /// Border Radius text, an optional param can be used to override defualt
+  /// Border Radius text, an optional param can be used to override default
   /// border radius, which is 4.0.
   double? borderRadius;
 
-  /// Font Size, an optional param can be used to override defualt font size,
+  /// Font Size, an optional param can be used to override default font size,
   /// which is 15.0
   double? fontSize;
 
-  /// Width, an optional param can be used to override defualt button Width.
+  /// Width, an optional param can be used to override default button Width.
   double? width;
 
-  /// Image Width, an optional param can be used to override defualt button
+  /// Image Width, an optional param can be used to override default button
   /// image width which is 45.0.
   double? imageWidth;
 
-  /// Grey out color, an optional param can be used to override defualt
-  /// background Color when button is in disbaled state.
+  /// Grey out color, an optional param can be used to override default
+  /// background Color when button is in disabled state.
   Color? disabledBackgroundColor;
 
-  /// Button Mode, an otpional param, can be used to create single style button.
+  /// Button Mode, an optional param, can be used to create single style button.
   SocialLoginButtonMode? mode;
+
+  final _defaultImagePath = "lib/assets/";
 
   @override
   Widget build(BuildContext context) {
@@ -118,49 +121,49 @@ class SocialLoginButton extends StatelessWidget {
       case SocialLoginButtonType.facebook:
         color = Colors.white;
         text = "Sign In with Facebook";
-        imageName = _imageURL + "facebook-logo.png";
+        imageName = _defaultImagePath + "facebook-logo.png";
         backgroundColor = const Color(0xFF334D92);
         break;
       case SocialLoginButtonType.google:
         color = Colors.black87;
         text = "Sign In with Google";
-        imageName = _imageURL + "google-logo.png";
+        imageName = _defaultImagePath + "google-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.twitter:
         color = Colors.white;
         text = "Sign In with Twitter";
-        imageName = _imageURL + "twitter-logo.png";
+        imageName = _defaultImagePath + "twitter-logo.png";
         backgroundColor = const Color(0xFF1DA1F2);
         break;
       case SocialLoginButtonType.apple:
         color = Colors.black;
         text = "Sign In with Apple";
-        imageName = _imageURL + "apple-logo.png";
+        imageName = _defaultImagePath + "apple-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.appleBlack:
         color = Colors.white;
         text = "Sign In with Apple";
-        imageName = _imageURL + "apple-black-logo.png";
+        imageName = _defaultImagePath + "apple-black-logo.png";
         backgroundColor = Colors.black;
         break;
       case SocialLoginButtonType.microsoft:
         color = const Color(0xFF5E5E5E);
         text = "Sign In with Microsoft";
-        imageName = _imageURL + "microsoft-logo.png";
+        imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.microsoftBlack:
         color = Colors.white;
         text = "Sign In with Microsoft";
-        imageName = _imageURL + "microsoft-logo.png";
+        imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = const Color(0xFF2F2F2F);
         break;
       case SocialLoginButtonType.github:
         color = const Color(0xFFFEFEFE);
         text = "Sign In with Github";
-        imageName = _imageURL + "github-logo.png";
+        imageName = _defaultImagePath + "github-logo.png";
         backgroundColor = const Color(0xFF444444);
         break;
       case SocialLoginButtonType.generalLogin:
@@ -169,7 +172,7 @@ class SocialLoginButton extends StatelessWidget {
         backgroundColor = Colors.teal[700];
     }
     return _LoginButton(
-      imageURL: imageName,
+      imagePath: imagePath ?? imageURL ?? imageName,
       text: this.text ?? text,
       color: textColor ?? color,
       backgroundColor: this.backgroundColor ?? backgroundColor,
@@ -181,6 +184,7 @@ class SocialLoginButton extends StatelessWidget {
       mode: mode!,
       width: width,
       imageWidth: imageWidth,
+      isNetworkImage: imagePath == null && imageURL != null,
     );
   }
 }
@@ -188,7 +192,8 @@ class SocialLoginButton extends StatelessWidget {
 class _LoginButton extends StatelessWidget {
   const _LoginButton({
     Key? key,
-    required this.imageURL,
+    required this.imagePath,
+    required this.isNetworkImage,
     required this.text,
     required this.color,
     this.backgroundColor = Colors.blueAccent,
@@ -202,7 +207,8 @@ class _LoginButton extends StatelessWidget {
     this.imageWidth,
   }) : super(key: key);
 
-  final String? imageURL;
+  final String? imagePath;
+  final bool isNetworkImage;
   final String text;
   final Color color;
   final Color? backgroundColor;
@@ -225,14 +231,14 @@ class _LoginButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              createImageChildren(imageURL),
+              createImageChildren(),
               Text(
                 mode == SocialLoginButtonMode.multi ? text : ' Sign In',
                 style: TextStyle(color: color, fontSize: fontSize),
               ),
               Opacity(
                 opacity: 0.0,
-                child: createImageChildren(imageURL, mode: mode),
+                child: createImageChildren(mode: mode),
               ),
             ],
           ),
@@ -259,15 +265,24 @@ class _LoginButton extends StatelessWidget {
     );
   }
 
-  createImageChildren(String? imageUrl, {SocialLoginButtonMode? mode}) {
+  createImageChildren({SocialLoginButtonMode? mode}) {
     if (mode == null || mode == SocialLoginButtonMode.multi) {
-      return imageUrl == null
+      return imagePath == null
           ? Column()
-          : Image.network(
-              imageUrl,
-              width: imageWidth,
-        errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
-            );
+          : isNetworkImage
+              ? Image.network(
+                  imagePath!,
+                  width: imageWidth,
+                  errorBuilder: (context, exception, stackTrace) =>
+                      const Icon(Icons.error),
+                )
+              : Image(
+                  image: AssetImage(
+                    imagePath!,
+                    package: 'social_login_buttons',
+                  ),
+                  width: imageWidth,
+                );
     }
     return Column();
   }

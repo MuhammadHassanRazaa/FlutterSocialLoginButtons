@@ -23,6 +23,7 @@ Add the dependency in pubsec.yaml file.
     onPressed: () {},
   )          
 ```
+
 You can also specify some other arguments which are:
 
 - imageURL (if you're specifying the image link from your Github repo, don't forget to change blob with raw)
