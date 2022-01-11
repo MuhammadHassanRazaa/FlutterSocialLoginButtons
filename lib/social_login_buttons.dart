@@ -171,6 +171,7 @@ class SocialLoginButton extends StatelessWidget {
         text = "Sign In";
         backgroundColor = Colors.teal[700];
     }
+    text = mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
     return _LoginButton(
       imagePath: imagePath ?? imageURL ?? imageName,
       text: this.text ?? text,
@@ -233,7 +234,7 @@ class _LoginButton extends StatelessWidget {
             children: <Widget>[
               createImageChildren(),
               Text(
-                mode == SocialLoginButtonMode.multi ? text : ' Sign In',
+                text,
                 style: TextStyle(color: color, fontSize: fontSize),
               ),
               Opacity(

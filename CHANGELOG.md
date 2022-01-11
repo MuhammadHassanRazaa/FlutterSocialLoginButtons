@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.6+2] - 2022-01-11
+
+### Fixed
+
+- Some Null Safety Issues
+- Single Mode Text Issues
+
 ## [1.0.6] - 2021-12-21
 
 ### Added
