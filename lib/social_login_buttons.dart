@@ -62,7 +62,7 @@ class SocialLoginButton extends StatelessWidget {
   final SocialLoginButtonType buttonType;
 
   /// Action onPressed
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   /// Image URL (increase you want to use network image), an optional param can be
   /// used to override default image.
@@ -218,7 +218,7 @@ class _LoginButton extends StatelessWidget {
   final double? imageWidth;
   final double borderRadius;
   final double fontSize;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final SocialLoginButtonMode mode;
 
   @override
