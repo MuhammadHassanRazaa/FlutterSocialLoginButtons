@@ -182,8 +182,7 @@ class SocialLoginButton extends StatelessWidget {
         _isLocal = true;
         break;
     }
-    text =
-        mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
+    text = mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
     return _LoginButton(
       imagePath: imagePath ?? imageURL ?? imageName,
       text: this.text ?? text,
