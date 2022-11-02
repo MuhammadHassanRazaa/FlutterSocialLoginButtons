@@ -109,6 +109,7 @@ class SocialLoginButton extends StatelessWidget {
   SocialLoginButtonMode? mode;
 
   final _defaultImagePath = "lib/assets/";
+  bool _isLocal = true;
 
   @override
   Widget build(BuildContext context) {
@@ -123,23 +124,27 @@ class SocialLoginButton extends StatelessWidget {
         text = "Sign In with Facebook";
         imageName = _defaultImagePath + "facebook-logo.png";
         backgroundColor = const Color(0xFF334D92);
+        _isLocal = false;
         break;
       case SocialLoginButtonType.google:
         color = Colors.black87;
         text = "Sign In with Google";
         imageName = _defaultImagePath + "google-logo.png";
         backgroundColor = Colors.white;
+        _isLocal = false;
         break;
       case SocialLoginButtonType.twitter:
         color = Colors.white;
         text = "Sign In with Twitter";
         imageName = _defaultImagePath + "twitter-logo.png";
         backgroundColor = const Color(0xFF1DA1F2);
+        _isLocal = false;
         break;
       case SocialLoginButtonType.apple:
         color = Colors.black;
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-logo.png";
+        _isLocal = false;
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.appleBlack:
@@ -147,31 +152,38 @@ class SocialLoginButton extends StatelessWidget {
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-black-logo.png";
         backgroundColor = Colors.black;
+        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoft:
         color = const Color(0xFF5E5E5E);
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = Colors.white;
+        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoftBlack:
         color = Colors.white;
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = const Color(0xFF2F2F2F);
+        _isLocal = false;
         break;
       case SocialLoginButtonType.github:
         color = const Color(0xFFFEFEFE);
         text = "Sign In with Github";
         imageName = _defaultImagePath + "github-logo.png";
         backgroundColor = const Color(0xFF444444);
+        _isLocal = false;
         break;
       case SocialLoginButtonType.generalLogin:
         color = Colors.white;
         text = "Sign In";
         backgroundColor = Colors.teal[700];
+        _isLocal = true;
+        break;
     }
-    text = mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
+    text =
+        mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
     return _LoginButton(
       imagePath: imagePath ?? imageURL ?? imageName,
       text: this.text ?? text,
@@ -186,6 +198,7 @@ class SocialLoginButton extends StatelessWidget {
       width: width,
       imageWidth: imageWidth,
       isNetworkImage: imagePath == null && imageURL != null,
+      isLocal: _isLocal,
     );
   }
 }
@@ -206,6 +219,7 @@ class _LoginButton extends StatelessWidget {
     required this.mode,
     this.width,
     this.imageWidth,
+    required this.isLocal,
   }) : super(key: key);
 
   final String? imagePath;
@@ -221,6 +235,7 @@ class _LoginButton extends StatelessWidget {
   final double fontSize;
   final VoidCallback? onPressed;
   final SocialLoginButtonMode mode;
+  final bool isLocal;
 
   @override
   Widget build(BuildContext context) {
@@ -280,7 +295,7 @@ class _LoginButton extends StatelessWidget {
               : Image(
                   image: AssetImage(
                     imagePath!,
-                    package: 'social_login_buttons',
+                    package: isLocal ? null: 'social_login_buttons',
                   ),
                   width: imageWidth,
                 );
