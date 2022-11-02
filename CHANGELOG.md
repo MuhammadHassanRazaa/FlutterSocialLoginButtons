@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2022-11-02
+
+### Fixed
+
+- Issues with loading local Assets
+
 ## [1.0.6+2] - 2022-01-11
 
 ### Fixed
