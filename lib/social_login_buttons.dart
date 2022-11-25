@@ -247,7 +247,7 @@ class _LoginButton extends StatelessWidget {
                 text,
                 style: TextStyle(color: color, fontSize: fontSize),
               ),
-              SizedBox(width: imageWidth)
+              getImageChildrenWidth(),
             ],
           ),
           style: ElevatedButton.styleFrom(
@@ -263,24 +263,29 @@ class _LoginButton extends StatelessWidget {
     );
   }
 
-  Widget createImageChildren({SocialLoginButtonMode? mode}) {
-    if (mode == null || mode == SocialLoginButtonMode.multi) {
-      return imagePath == null
-          ? const SizedBox.shrink()
-          : isNetworkImage
-              ? Image.network(
+  SizedBox getImageChildrenWidth() {
+    return imagePath == null
+        ? const SizedBox.shrink()
+        : isNetworkImage
+            ? SizedBox(width: imageWidth)
+            : SizedBox(width: imageWidth);
+  }
+
+  Widget createImageChildren() {
+    return imagePath == null
+        ? const SizedBox.shrink()
+        : isNetworkImage
+            ? Image.network(
+                imagePath!,
+                width: imageWidth,
+                errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
+              )
+            : Image(
+                image: AssetImage(
                   imagePath!,
-                  width: imageWidth,
-                  errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
-                )
-              : Image(
-                  image: AssetImage(
-                    imagePath!,
-                    package: isLocal ? null : 'social_login_buttons',
-                  ),
-                  width: imageWidth,
-                );
-    }
-    return const SizedBox.shrink();
+                  package: isLocal ? null : 'social_login_buttons',
+                ),
+                width: imageWidth,
+              );
   }
 }
