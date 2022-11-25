@@ -1,7 +1,6 @@
 library social_login_button;
 
-export 'package:social_login_buttons/social_login_buttons.dart'
-    show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
+//export 'package:social_login_buttons/social_login_buttons.dart' show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
 import 'package:flutter/material.dart';
 
@@ -38,9 +37,10 @@ enum SocialLoginButtonType {
 /// All SSupported Button Modes
 enum SocialLoginButtonMode { single, multi }
 
-// ignore: must_be_immutable
+const _localSocialLoginButtonTypes = {SocialLoginButtonType.generalLogin};
+
 class SocialLoginButton extends StatelessWidget {
-  SocialLoginButton({
+  const SocialLoginButton({
     Key? key,
     required this.buttonType,
     required this.onPressed,
@@ -66,50 +66,47 @@ class SocialLoginButton extends StatelessWidget {
 
   /// Image URL (increase you want to use network image), an optional param can be
   /// used to override default image.
-  String? imageURL;
+  final String? imageURL;
 
   /// Image Path (increase you want to use local image), an optional param can be
   /// used to override default image.
-  String? imagePath;
+  final String? imagePath;
 
   /// Button text, an optional param can be used to override default text
-  String? text;
+  final String? text;
 
   /// Background Color, an optional param can be used to override default
   /// background color.
-  Color? backgroundColor;
+  final Color? backgroundColor;
 
   /// Text Color, an optional param can be used to override default text color.
-  Color? textColor;
+  final Color? textColor;
 
   /// Height, an optional param can be used to override default height of button,
   /// which is 55.0
-  double? height;
+  final double? height;
 
   /// Border Radius text, an optional param can be used to override default
   /// border radius, which is 4.0.
-  double? borderRadius;
+  final double? borderRadius;
 
   /// Font Size, an optional param can be used to override default font size,
   /// which is 15.0
-  double? fontSize;
+  final double? fontSize;
 
   /// Width, an optional param can be used to override default button Width.
-  double? width;
+  final double? width;
 
   /// Image Width, an optional param can be used to override default button
   /// image width which is 45.0.
-  double? imageWidth;
+  final double? imageWidth;
 
   /// Grey out color, an optional param can be used to override default
   /// background Color when button is in disabled state.
-  Color? disabledBackgroundColor;
+  final Color? disabledBackgroundColor;
 
   /// Button Mode, an optional param, can be used to create single style button.
-  SocialLoginButtonMode? mode;
-
-  final _defaultImagePath = "lib/assets/";
-  bool _isLocal = true;
+  final SocialLoginButtonMode? mode;
 
   @override
   Widget build(BuildContext context) {
@@ -117,34 +114,32 @@ class SocialLoginButton extends StatelessWidget {
     String? imageName;
     String? text;
     Color? backgroundColor;
+    const _defaultImagePath = "lib/assets/";
 
+    final _isLocal = _localSocialLoginButtonTypes.contains(buttonType) ? true : false;
     switch (buttonType) {
       case SocialLoginButtonType.facebook:
         color = Colors.white;
         text = "Sign In with Facebook";
         imageName = _defaultImagePath + "facebook-logo.png";
         backgroundColor = const Color(0xFF334D92);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.google:
         color = Colors.black87;
         text = "Sign In with Google";
         imageName = _defaultImagePath + "google-logo.png";
         backgroundColor = Colors.white;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.twitter:
         color = Colors.white;
         text = "Sign In with Twitter";
         imageName = _defaultImagePath + "twitter-logo.png";
         backgroundColor = const Color(0xFF1DA1F2);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.apple:
         color = Colors.black;
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-logo.png";
-        _isLocal = false;
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.appleBlack:
@@ -152,34 +147,29 @@ class SocialLoginButton extends StatelessWidget {
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-black-logo.png";
         backgroundColor = Colors.black;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoft:
         color = const Color(0xFF5E5E5E);
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = Colors.white;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoftBlack:
         color = Colors.white;
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = const Color(0xFF2F2F2F);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.github:
         color = const Color(0xFFFEFEFE);
         text = "Sign In with Github";
         imageName = _defaultImagePath + "github-logo.png";
         backgroundColor = const Color(0xFF444444);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.generalLogin:
         color = Colors.white;
         text = "Sign In";
         backgroundColor = Colors.teal[700];
-        _isLocal = true;
         break;
     }
     text = mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
@@ -288,13 +278,12 @@ class _LoginButton extends StatelessWidget {
               ? Image.network(
                   imagePath!,
                   width: imageWidth,
-                  errorBuilder: (context, exception, stackTrace) =>
-                      const Icon(Icons.error),
+                  errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
                 )
               : Image(
                   image: AssetImage(
                     imagePath!,
-                    package: isLocal ? null: 'social_login_buttons',
+                    package: isLocal ? null : 'social_login_buttons',
                   ),
                   width: imageWidth,
                 );
