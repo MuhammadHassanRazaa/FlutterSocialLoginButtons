@@ -205,8 +205,8 @@ class _LoginButton extends StatelessWidget {
     required this.isNetworkImage,
     required this.text,
     required this.color,
-    this.backgroundColor = Colors.blueAccent,
-    this.disabledBackgroundColor,
+    required this.backgroundColor,
+    required this.disabledBackgroundColor,
     required this.height,
     required this.borderRadius,
     required this.fontSize,
@@ -252,9 +252,7 @@ class _LoginButton extends StatelessWidget {
           ),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius),
-              ),
+              borderRadius: BorderRadius.circular(borderRadius),
             ),
             disabledBackgroundColor: disabledBackgroundColor,
             backgroundColor: backgroundColor,
