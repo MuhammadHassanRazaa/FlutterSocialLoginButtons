@@ -62,7 +62,11 @@ class SocialLoginButton extends StatelessWidget {
     this.width,
     this.imageWidth = 45,
     this.mode = SocialLoginButtonMode.multi,
+    this.mainAxisSize = MainAxisSize.max,
   }) : super(key: key);
+
+  /// [MainAxisSize] for the internal row
+  final MainAxisSize mainAxisSize;
 
   /// Button Type
   final SocialLoginButtonType buttonType;
@@ -194,6 +198,7 @@ class SocialLoginButton extends StatelessWidget {
       imageWidth: imageWidth,
       isNetworkImage: imagePath == null && imageURL != null,
       isLocal: _isLocal,
+      mainAxisSize: mainAxisSize,
     );
   }
 }
@@ -212,11 +217,12 @@ class _LoginButton extends StatelessWidget {
     required this.fontSize,
     required this.onPressed,
     required this.mode,
-    this.width,
-    this.imageWidth,
+    required this.width,
+    required this.imageWidth,
     required this.isLocal,
+    required this.mainAxisSize,
   }) : super(key: key);
-
+  final MainAxisSize mainAxisSize;
   final String? imagePath;
   final bool isNetworkImage;
   final String text;
@@ -234,31 +240,30 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: height,
-        width: width,
-        child: ElevatedButton(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              createImageChildren(),
-              Text(
-                text,
-                style: TextStyle(color: color, fontSize: fontSize),
-              ),
-              getImageChildrenWidth(),
-            ],
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
+    return SizedBox(
+      height: height,
+      width: width,
+      child: ElevatedButton(
+        child: Row(
+          mainAxisSize: mainAxisSize,
+          mainAxisAlignment: mainAxisSize == MainAxisSize.max ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+          children: <Widget>[
+            createImageChildren(),
+            Text(
+              text,
+              style: TextStyle(color: color, fontSize: fontSize),
             ),
-            disabledBackgroundColor: disabledBackgroundColor,
-            backgroundColor: backgroundColor,
-          ),
-          onPressed: onPressed,
+            if (mainAxisSize == MainAxisSize.max) getImageChildrenWidth(),
+          ],
         ),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          disabledBackgroundColor: disabledBackgroundColor,
+          backgroundColor: backgroundColor,
+        ),
+        onPressed: onPressed,
       ),
     );
   }

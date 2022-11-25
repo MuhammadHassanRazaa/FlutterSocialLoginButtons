@@ -92,21 +92,48 @@ class MyHomePage extends StatelessWidget {
                 onPressed: () {},
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+              Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
                 children: [
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
                     onPressed: () {},
                     mode: SocialLoginButtonMode.single,
+                    mainAxisSize: MainAxisSize.min,
                   ),
-                  const SizedBox(width: 8),
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.microsoft,
                     onPressed: () {},
                     mode: SocialLoginButtonMode.single,
+                    mainAxisSize: MainAxisSize.min,
                   ),
-                ],
+                  SocialLoginButton(
+                    buttonType: SocialLoginButtonType.apple,
+                    onPressed: () {},
+                    mode: SocialLoginButtonMode.single,
+                    mainAxisSize: MainAxisSize.min,
+                  ),
+                  SocialLoginButton(
+                    buttonType: SocialLoginButtonType.appleBlack,
+                    onPressed: () {},
+                    mode: SocialLoginButtonMode.single,
+                    mainAxisSize: MainAxisSize.min,
+                  ),
+                  SocialLoginButton(
+                    buttonType: SocialLoginButtonType.facebook,
+                    onPressed: () {},
+                    mode: SocialLoginButtonMode.single,
+                    mainAxisSize: MainAxisSize.min,
+                  ),
+                ]
+                    .map(
+                      (e) => Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: e,
+                      ),
+                    )
+                    .toList(),
               )
             ],
           ),
