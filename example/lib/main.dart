@@ -93,10 +93,16 @@ class MyHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SocialLoginButton(
                     buttonType: SocialLoginButtonType.google,
+                    onPressed: () {},
+                    mode: SocialLoginButtonMode.single,
+                  ),
+                  const SizedBox(width: 8),
+                  SocialLoginButton(
+                    buttonType: SocialLoginButtonType.microsoft,
                     onPressed: () {},
                     mode: SocialLoginButtonMode.single,
                   ),
