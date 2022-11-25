@@ -34,8 +34,14 @@ enum SocialLoginButtonType {
   generalLogin
 }
 
-/// All SSupported Button Modes
-enum SocialLoginButtonMode { single, multi }
+/// All Supported Button Modes
+enum SocialLoginButtonMode {
+  /// the text becomes "Sign In"
+  single,
+
+  /// the text becomes "Sign In With (Provider)"
+  multi
+}
 
 const _localSocialLoginButtonTypes = {SocialLoginButtonType.generalLogin};
 
@@ -241,28 +247,17 @@ class _LoginButton extends StatelessWidget {
                 text,
                 style: TextStyle(color: color, fontSize: fontSize),
               ),
-              Opacity(
-                opacity: 0.0,
-                child: createImageChildren(mode: mode),
-              ),
+              SizedBox(width: imageWidth)
             ],
           ),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(borderRadius),
-                ),
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(borderRadius),
               ),
             ),
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return disabledBackgroundColor ?? backgroundColor!;
-                }
-                return backgroundColor!;
-              },
-            ),
+            disabledBackgroundColor: disabledBackgroundColor,
+            backgroundColor: backgroundColor,
           ),
           onPressed: onPressed,
         ),
@@ -270,10 +265,10 @@ class _LoginButton extends StatelessWidget {
     );
   }
 
-  createImageChildren({SocialLoginButtonMode? mode}) {
+  Widget createImageChildren({SocialLoginButtonMode? mode}) {
     if (mode == null || mode == SocialLoginButtonMode.multi) {
       return imagePath == null
-          ? Column()
+          ? const SizedBox.shrink()
           : isNetworkImage
               ? Image.network(
                   imagePath!,
@@ -288,6 +283,6 @@ class _LoginButton extends StatelessWidget {
                   width: imageWidth,
                 );
     }
-    return Column();
+    return const SizedBox.shrink();
   }
 }
