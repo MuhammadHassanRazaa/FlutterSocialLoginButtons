@@ -1,7 +1,6 @@
 library social_login_button;
 
-export 'package:social_login_buttons/social_login_buttons.dart'
-    show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
+//export 'package:social_login_buttons/social_login_buttons.dart' show SocialLoginButton, SocialLoginButtonType, SocialLoginButtonMode;
 
 import 'package:flutter/material.dart';
 
@@ -35,12 +34,19 @@ enum SocialLoginButtonType {
   generalLogin
 }
 
-/// All SSupported Button Modes
-enum SocialLoginButtonMode { single, multi }
+/// All Supported Button Modes
+enum SocialLoginButtonMode {
+  /// the text becomes "Sign In"
+  single,
 
-// ignore: must_be_immutable
+  /// the text becomes "Sign In With (Provider)"
+  multi
+}
+
+const _localSocialLoginButtonTypes = {SocialLoginButtonType.generalLogin};
+
 class SocialLoginButton extends StatelessWidget {
-  SocialLoginButton({
+  const SocialLoginButton({
     Key? key,
     required this.buttonType,
     required this.onPressed,
@@ -56,7 +62,11 @@ class SocialLoginButton extends StatelessWidget {
     this.width,
     this.imageWidth = 45,
     this.mode = SocialLoginButtonMode.multi,
+    this.mainAxisSize = MainAxisSize.max,
   }) : super(key: key);
+
+  /// [MainAxisSize] for the internal row
+  final MainAxisSize mainAxisSize;
 
   /// Button Type
   final SocialLoginButtonType buttonType;
@@ -66,50 +76,47 @@ class SocialLoginButton extends StatelessWidget {
 
   /// Image URL (increase you want to use network image), an optional param can be
   /// used to override default image.
-  String? imageURL;
+  final String? imageURL;
 
   /// Image Path (increase you want to use local image), an optional param can be
   /// used to override default image.
-  String? imagePath;
+  final String? imagePath;
 
   /// Button text, an optional param can be used to override default text
-  String? text;
+  final String? text;
 
   /// Background Color, an optional param can be used to override default
   /// background color.
-  Color? backgroundColor;
+  final Color? backgroundColor;
 
   /// Text Color, an optional param can be used to override default text color.
-  Color? textColor;
+  final Color? textColor;
 
   /// Height, an optional param can be used to override default height of button,
   /// which is 55.0
-  double? height;
+  final double? height;
 
   /// Border Radius text, an optional param can be used to override default
   /// border radius, which is 4.0.
-  double? borderRadius;
+  final double? borderRadius;
 
   /// Font Size, an optional param can be used to override default font size,
   /// which is 15.0
-  double? fontSize;
+  final double? fontSize;
 
   /// Width, an optional param can be used to override default button Width.
-  double? width;
+  final double? width;
 
   /// Image Width, an optional param can be used to override default button
   /// image width which is 45.0.
-  double? imageWidth;
+  final double? imageWidth;
 
   /// Grey out color, an optional param can be used to override default
   /// background Color when button is in disabled state.
-  Color? disabledBackgroundColor;
+  final Color? disabledBackgroundColor;
 
   /// Button Mode, an optional param, can be used to create single style button.
-  SocialLoginButtonMode? mode;
-
-  final _defaultImagePath = "lib/assets/";
-  bool _isLocal = true;
+  final SocialLoginButtonMode? mode;
 
   @override
   Widget build(BuildContext context) {
@@ -117,34 +124,32 @@ class SocialLoginButton extends StatelessWidget {
     String? imageName;
     String? text;
     Color? backgroundColor;
+    const _defaultImagePath = "lib/assets/";
 
+    final _isLocal = _localSocialLoginButtonTypes.contains(buttonType) ? true : false;
     switch (buttonType) {
       case SocialLoginButtonType.facebook:
         color = Colors.white;
         text = "Sign In with Facebook";
         imageName = _defaultImagePath + "facebook-logo.png";
         backgroundColor = const Color(0xFF334D92);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.google:
         color = Colors.black87;
         text = "Sign In with Google";
         imageName = _defaultImagePath + "google-logo.png";
         backgroundColor = Colors.white;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.twitter:
         color = Colors.white;
         text = "Sign In with Twitter";
         imageName = _defaultImagePath + "twitter-logo.png";
         backgroundColor = const Color(0xFF1DA1F2);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.apple:
         color = Colors.black;
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-logo.png";
-        _isLocal = false;
         backgroundColor = Colors.white;
         break;
       case SocialLoginButtonType.appleBlack:
@@ -152,34 +157,29 @@ class SocialLoginButton extends StatelessWidget {
         text = "Sign In with Apple";
         imageName = _defaultImagePath + "apple-black-logo.png";
         backgroundColor = Colors.black;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoft:
         color = const Color(0xFF5E5E5E);
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = Colors.white;
-        _isLocal = false;
         break;
       case SocialLoginButtonType.microsoftBlack:
         color = Colors.white;
         text = "Sign In with Microsoft";
         imageName = _defaultImagePath + "microsoft-logo.png";
         backgroundColor = const Color(0xFF2F2F2F);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.github:
         color = const Color(0xFFFEFEFE);
         text = "Sign In with Github";
         imageName = _defaultImagePath + "github-logo.png";
         backgroundColor = const Color(0xFF444444);
-        _isLocal = false;
         break;
       case SocialLoginButtonType.generalLogin:
         color = Colors.white;
         text = "Sign In";
         backgroundColor = Colors.teal[700];
-        _isLocal = true;
         break;
     }
     text = mode == null || mode == SocialLoginButtonMode.multi ? text : ' Sign In';
@@ -198,6 +198,7 @@ class SocialLoginButton extends StatelessWidget {
       imageWidth: imageWidth,
       isNetworkImage: imagePath == null && imageURL != null,
       isLocal: _isLocal,
+      mainAxisSize: mainAxisSize,
     );
   }
 }
@@ -209,18 +210,19 @@ class _LoginButton extends StatelessWidget {
     required this.isNetworkImage,
     required this.text,
     required this.color,
-    this.backgroundColor = Colors.blueAccent,
-    this.disabledBackgroundColor,
+    required this.backgroundColor,
+    required this.disabledBackgroundColor,
     required this.height,
     required this.borderRadius,
     required this.fontSize,
     required this.onPressed,
     required this.mode,
-    this.width,
-    this.imageWidth,
+    required this.width,
+    required this.imageWidth,
     required this.isLocal,
+    required this.mainAxisSize,
   }) : super(key: key);
-
+  final MainAxisSize mainAxisSize;
   final String? imagePath;
   final bool isNetworkImage;
   final String text;
@@ -238,67 +240,57 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: height,
-        width: width,
-        child: ElevatedButton(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              createImageChildren(),
-              Text(
-                text,
-                style: TextStyle(color: color, fontSize: fontSize),
-              ),
-              Opacity(
-                opacity: 0.0,
-                child: createImageChildren(mode: mode),
-              ),
-            ],
-          ),
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(borderRadius),
-                ),
-              ),
+    return SizedBox(
+      height: height,
+      width: width,
+      child: ElevatedButton(
+        child: Row(
+          mainAxisSize: mainAxisSize,
+          mainAxisAlignment: mainAxisSize == MainAxisSize.max ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+          children: <Widget>[
+            createImageChildren(),
+            Text(
+              text,
+              style: TextStyle(color: color, fontSize: fontSize),
             ),
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return disabledBackgroundColor ?? backgroundColor!;
-                }
-                return backgroundColor!;
-              },
-            ),
-          ),
-          onPressed: onPressed,
+            if (mainAxisSize == MainAxisSize.max) getImageChildrenWidth(),
+          ],
         ),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          disabledBackgroundColor: disabledBackgroundColor,
+          backgroundColor: backgroundColor,
+        ),
+        onPressed: onPressed,
       ),
     );
   }
 
-  createImageChildren({SocialLoginButtonMode? mode}) {
-    if (mode == null || mode == SocialLoginButtonMode.multi) {
-      return imagePath == null
-          ? Column()
-          : isNetworkImage
-              ? Image.network(
+  SizedBox getImageChildrenWidth() {
+    return imagePath == null
+        ? const SizedBox.shrink()
+        : isNetworkImage
+            ? SizedBox(width: imageWidth)
+            : SizedBox(width: imageWidth);
+  }
+
+  Widget createImageChildren() {
+    return imagePath == null
+        ? const SizedBox.shrink()
+        : isNetworkImage
+            ? Image.network(
+                imagePath!,
+                width: imageWidth,
+                errorBuilder: (context, exception, stackTrace) => const Icon(Icons.error),
+              )
+            : Image(
+                image: AssetImage(
                   imagePath!,
-                  width: imageWidth,
-                  errorBuilder: (context, exception, stackTrace) =>
-                      const Icon(Icons.error),
-                )
-              : Image(
-                  image: AssetImage(
-                    imagePath!,
-                    package: isLocal ? null: 'social_login_buttons',
-                  ),
-                  width: imageWidth,
-                );
-    }
-    return Column();
+                  package: isLocal ? null : 'social_login_buttons',
+                ),
+                width: imageWidth,
+              );
   }
 }
