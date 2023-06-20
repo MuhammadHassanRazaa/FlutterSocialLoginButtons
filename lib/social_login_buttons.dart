@@ -123,7 +123,7 @@ class SocialLoginButton extends StatelessWidget {
         color = Colors.white;
         text = "Sign In with Facebook";
         imageName = _defaultImagePath + "facebook-logo.png";
-        backgroundColor = const Color(0xFF334D92);
+        backgroundColor = const Color(0xFF1877F2);
         _isLocal = false;
         break;
       case SocialLoginButtonType.google:
