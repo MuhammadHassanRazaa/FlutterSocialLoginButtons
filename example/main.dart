@@ -87,7 +87,10 @@ class MyHomePage extends StatelessWidget {
                 height: 50,
                 text: 'SignIn',
                 borderRadius: 20,
-                fontSize: 25,
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                ),
                 buttonType: SocialLoginButtonType.generalLogin,
                 onPressed: () {},
               ),
