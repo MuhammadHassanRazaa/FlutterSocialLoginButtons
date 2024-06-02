@@ -12,7 +12,7 @@ Add the dependency in pubsec.yaml file.
   dependencies:
     flutter:
       sdk: flutter
-    social_login_button: 1.0.5+3
+    social_login_buttons: 1.0.7
 ```
 
 ## How to Use
